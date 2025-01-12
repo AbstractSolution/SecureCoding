@@ -11,6 +11,19 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Please provide the address of a file as an input.\n");
         return -1;
     }
+
+    static char ok_chars[] = "abcdefghijklmnopqrstuvwxyz"
+                             "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                             "1234567890_-.@";
+    char *user_data = argv[1];
+    char *cp = user_data; /* Cursor into string */
+    for (char *cp = user_data; *cp != '\0'; cp++) {
+        if (strchr(ok_chars, *cp) == NULL) {
+            fprintf(stderr, "Please provide the address of a file as an input.\n");
+            return -1;
+        }
+    }
+ 
     char cmd[BUFSIZE] = "wc -c < ";
     strcat(cmd, argv[1]);
     system(cmd);
