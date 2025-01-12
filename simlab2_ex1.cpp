@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     else
     {
         char cmd[BUFSIZE] = "wc -c < ";
-        strcat(cmd, argv[1]);
+        strncat(cmd, argv[1], 247);
         system(cmd);
     }
  
