@@ -50,9 +50,20 @@ int main(int argc, char** argv) {
         }
         else
         {
-           char cmd[BUFSIZE] = "wc -c < ";
-           strncat(cmd, argv[1], 247);
-           system(cmd);
+           FILE *file = fopen(argv[1], "rb");
+           if (file == NULL)
+           {
+               fprintf(stderr, "Error: Could not open file %s\n", argv[1]);
+               return -1;
+           }
+
+           // Get file size
+           fseek(file, 0, SEEK_END);
+           long size = ftell(file);
+           fclose(file);
+
+           // Print the size
+           printf("%ld\n", size);
         }
     }
  
